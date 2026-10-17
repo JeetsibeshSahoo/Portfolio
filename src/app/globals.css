@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-emerald-accent: #00f5a0;
+  --color-emerald-glow: rgba(0, 245, 160, 0.15);
+  --color-cosmic-base: #060709;
+  --color-surface-dark: #0d0f14;
+  --color-surface-card: #12151d;
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-accent: rgba(0, 245, 160, 0.3);
+  --color-text-muted: #8e95a5;
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #060709;
+  --foreground: #f3f4f6;
+  --emerald-accent: #00f5a0;
+  --emerald-dim: #059669;
+  --surface-dark: #0d0f14;
+  --border-subtle: rgba(255, 255, 255, 0.07);
+}
+
+/* Base Body Setup */
+html {
+  scroll-behavior: auto; /* Handled smoothly by Lenis */
+  background-color: var(--background);
+  color: var(--foreground);
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #060709;
+  color: #f3f4f6;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  selection-background-color: #00f5a0;
+  selection-color: #060709;
+}
+
+::selection {
+  background: #00f5a0;
+  color: #060709;
+}
+
+/* Crazy Atmospheric Background Layers */
+.cyber-grid {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.ambient-glow {
+  background: 
+    radial-gradient(circle 800px at 20% 15%, rgba(0, 245, 160, 0.07), transparent 70%),
+    radial-gradient(circle 900px at 80% 65%, rgba(139, 92, 246, 0.05), transparent 70%),
+    radial-gradient(circle 600px at 50% 90%, rgba(0, 229, 255, 0.04), transparent 60%);
+}
+
+/* Glassmorphism Card Utility */
+.glass-panel {
+  background: rgba(13, 15, 20, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(0, 245, 160, 0.25);
+  box-shadow: 0 0 25px rgba(0, 245, 160, 0.08);
+}
+
+/* Hide default cursor on desktop when custom cursor is active */
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active {
+    cursor: none;
+  }
+  body.custom-cursor-active a,
+  body.custom-cursor-active button,
+  body.custom-cursor-active [role="button"] {
+    cursor: none;
+  }
+}
+
+/* Accessible focus outlines for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #00f5a0;
+  outline-offset: 3px;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
