@@ -90,7 +90,7 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
-  const coreFocus = ["Next.js", "Python (FastAPI)", "LangChain", "ChromaDB", "WebRTC", "Socket.io"];
+  const coreFocus = ["JavaScript", "Python", "React.js", "Express.js", "Node.js", "Langchain", "RAG", "ChromaDB", "MongoDB", "PostgreSQL"];
 
   return (
     <section
